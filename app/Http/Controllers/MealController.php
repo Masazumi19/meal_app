@@ -97,9 +97,10 @@ class MealController extends Controller
     public function edit($id)
     {
         $meal = Meal::find($id);
-
-        return view('meals.edit', compact('meal'));
+        $categories = Category::all();
+        return view('meals.edit', compact('meal', 'categories'));
     }
+
 
     /**
      * Update the specified resource in storage.
