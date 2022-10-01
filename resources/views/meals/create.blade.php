@@ -23,7 +23,7 @@
                 @foreach ($categories as $category)
                     <p><input type="radio" name="category" value="{{ $category->id }}" {{ old("category") == $category->id ? "checked" : "" }} >{{ $category->category }}</p>
                 @endforeach
-            </div>
+            </div>{{-- name=""は実際に送るデータの名前 --}}
 
             <br>
             <div class="mb-4">

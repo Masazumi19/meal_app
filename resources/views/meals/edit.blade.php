@@ -19,11 +19,26 @@
             </div>
 
             <div class="mb-4">
-                <label class="block text-gray-700 text-sm mb-2" for="category">カテゴリー</label>
+                <label class="block text-gray-700 text-sm mb-2" for="category">
+                    カテゴリー
+                </label>
                 @foreach ($categories as $category)
-                    <p><input type="radio" name="category" value="{{ $category->id }}">{{ $category->category }}</p>
+                    <div><lavel>
+                        <input type="radio" name="category_id" id="category{{ $category->id }}" value="{{ $category->id }}" {{ old('category_id', $meal->category_id) == $category->id ? 'checked': '' }}>
+                            {{ $category->category }}</lavel>  <!--なぜここをlavelで囲っても文字が反応しないのか-->
+                        <!--<label for="category{{ $category->id }}">{{ $category->name }}</label>-->
+                    </div>
                 @endforeach
             </div>
+            {{--元の自分のやつ。復習用 
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm mb-2" for="category">カテゴリー
+                </label>
+                @foreach ($categories as $category)
+                    <p><input type="radio" name="category_id" value="{{ $category->id }}">{{ $category->category }}</p>
+                @endforeach
+            </div>
+            --}}
 
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm mb-2" for="body">

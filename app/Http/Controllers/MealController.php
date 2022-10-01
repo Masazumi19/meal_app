@@ -96,10 +96,12 @@ class MealController extends Controller
      */
     public function edit($id)
     {
-        $meal = Meal::find($id);
         $categories = Category::all();
+        $meal = Meal::find($id);
         return view('meals.edit', compact('meal', 'categories'));
+        
     }
+
 
 
     /**

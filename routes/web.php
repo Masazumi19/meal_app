@@ -26,10 +26,6 @@ Route::resource('meals', MealController::class)
     ->only(['create', 'store', 'edit', 'update', 'destroy'])
     ->middleware('auth');
 
-Route::resource('meals.comments', CommentController::class)
-    ->only(['create', 'store', 'edit', 'update', 'destroy'])
-    ->middleware('auth');
-
 Route::resource('meals', MealController::class)
     ->only(['show', 'index']);
 
