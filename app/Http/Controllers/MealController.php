@@ -45,7 +45,7 @@ class MealController extends Controller
         $meal = new Meal($request->all());
         $meal->user_id = $request->user()->id;
         $meal->category_id = $request->category;
-        
+
         $file = $request->file('image');
         $meal->image = self::createFileName($file);
 
@@ -83,7 +83,7 @@ class MealController extends Controller
     public function show($id)
     {
         $meal = meal::with(['user'])->find($id);
-        
+
 
         return view('meals.show', compact('meal'));
     }
@@ -99,7 +99,6 @@ class MealController extends Controller
         $categories = Category::all();
         $meal = Meal::find($id);
         return view('meals.edit', compact('meal', 'categories'));
-        
     }
 
 
@@ -114,6 +113,7 @@ class MealController extends Controller
     public function update(MealRequest $request, $id)
     {
         $meal = Meal::find($id);
+        $meal->category_id = $request->category_id;
 
         if ($request->user()->cannot('update', $meal)) {
             return redirect()->route('meals.show', $meal)
@@ -157,7 +157,8 @@ class MealController extends Controller
             return back()->withInput()->withErrors($e->getMessage());
         }
 
-        return redirect()->route('meals.show', $meal)
+        return redirect()
+            ->route('meals.show', $meal)
             ->with('notice', '記事を更新しました');
     }
 
