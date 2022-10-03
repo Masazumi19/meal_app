@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\MealRequest;
-use App\Models\Category;
+use Illuminate\Http\Request;
 use App\Models\Meal;
+use App\Models\Category;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Favorite;
+use App\Http\Requests\MealRequest;
+use Illuminate\Support\Facades\Auth;
 
 class MealController extends Controller
 {
@@ -82,13 +85,19 @@ class MealController extends Controller
      */
     public function show($id)
     {
-        $meal = meal::with(['user'])->find($id);
-
-
-        return view('meals.show', compact('meal'));
+        $meal = Meal::find($id);
+        $favorite = Favorite::where('user_id',Auth::id())->where('meal_id', $meal->id)->first();
+        $favorite_count = Favorite::where('meal_id', $meal->id)->count();
+        
+        
+            return view('meals.show', compact('meal','favorite','favorite_count'));
     }
+    
+
+    
 
     /**
+
      * Show the form for editing the specified resource.
      *
      * @param  int  $id

@@ -65,7 +65,7 @@ class MealPolicy
      */
     public function delete(User $user, Meal $meal)
     {
-         return $user->id === $meal->user_id;
+        return $user->id === $meal->user_id;
     }
 
     /**

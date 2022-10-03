@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MealController;
-use App\Http\Controllers\CommentController;
+use App\Http\Controllers\FavoriteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,3 +30,7 @@ Route::resource('meals', MealController::class)
     ->only(['show', 'index']);
 
 require __DIR__ . '/auth.php';
+
+Route::resource('meals.favorites', FavoriteController::class)
+    ->only(['store', 'destroy'])
+    ->middleware('auth');

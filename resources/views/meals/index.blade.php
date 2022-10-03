@@ -16,12 +16,13 @@
                         <img class="w-full mb-2" src="{{ Storage::url($meal->image_path) }}" alt="">
                         <p class="text-gray-700 text-base">{{ Str::limit($meal->description, 50) }}</p>
                     </a>
-                    
+                    <?php $favorite_count = \App\Models\Favorite::where('meal_id', $meal->id)->count(); ?>
+                    <div>お気に入り数：{{ $favorite_count }}
+                    </div>
                 </article>
             @endforeach
         </div>
         {{ $meals->links() }}
-    </div>
 </x-app-layout>
 
 {{--   <div class="container max-w-7xl mx-auto px-4 md:px-12 pb-3 mt-3">
